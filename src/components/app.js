@@ -13,11 +13,17 @@ const todos = [
 ]
 
 export default class App extends React.Component{
+    constructor(props) {
+        super(props);
+        this.state = {
+            todos
+        };
+    }
     render() {
         return (
             <div>
                 <h1>React todo list</h1>
-                <TodosList/>
+                <TodosList todos={this.state.todos}/>
             </div>
         );
     }
