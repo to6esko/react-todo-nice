@@ -3,7 +3,7 @@ import _ from 'lodash';
 import TodosListHeader from './todos-list-header';
 import TodosListItem from './todos-list-item';
 
-export default class TodosList extends React.Component{
+export default class TodosList extends React.Component {
     renderItems() {
         return _.map(this.props.todos, (todo, i) =>
             <TodosListItem key={i} {...todo}/>)
@@ -13,8 +13,8 @@ export default class TodosList extends React.Component{
             <table>
                 <TodosListHeader/>
                 <tbody>
-                    {this.renderItems()}
-                    </tbody>
+                    {this.renderItems() }
+                </tbody>
             </table>
         );
     }
