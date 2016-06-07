@@ -40,16 +40,26 @@ export default class App extends React.Component {
         const foundTodo = _.find(this.state.todos, todo => todo.task === oldTask);
         foundTodo.task = newTask;
         this.setState({ todos: this.state.todos });
-}    
+    }    
+
+
+
+    deleteTask(taskDelete) {
+        _.remove(this.state.todos, todo => todo.task === taskDelete);
+        this.setState({ todos: this.state.todos });
+}
+
+
     render() {
         return (
             <div>
                 <h1>React todo list</h1>
-                <CreateTodo createTask={this.createTask.bind(this) }/>
+                <CreateTodo todos={this.state.todos} createTask={this.createTask.bind(this) }/>
                 <TodosList
                     todos={this.state.todos}
                     toggleTask={this.toggleTask.bind(this) }
-                    saveTask={this.saveTask.bind(this)}/>
+                    saveTask={this.saveTask.bind(this) }
+                    deleteTask={this.deleteTask.bind(this)}/>
             </div>
         );
     }

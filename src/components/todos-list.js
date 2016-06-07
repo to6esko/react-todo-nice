@@ -9,6 +9,7 @@ export default class TodosList extends React.Component {
         return _.map(this.props.todos, (todo, i) =>
             <TodosListItem key={i} {...todo} {...props}/>)
     }
+
     render() {
         return (
             <table>
