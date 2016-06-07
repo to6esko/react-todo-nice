@@ -5,7 +5,7 @@ import CreateTodo from './create-todo';
 const todos = [
     {
         task: 'make React tutorial',
-        isCompleted:false
+        isCompleted: false
     },
     {
         task: 'eat dinner',
@@ -13,10 +13,10 @@ const todos = [
     }
 ]
 
-export default class App extends React.Component{
+export default class App extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {todos};
+        this.state = { todos };
     }
 
     createTask(task) {
@@ -27,14 +27,22 @@ export default class App extends React.Component{
         this.setState({ todos: this.state.todos });
     }
 
-    
+
+    toggleTask(task) {
+        const foundTodo = _.find(this.state.todos, todo =>
+            todo.task === task);
+        foundTodo.isCompleted = !foundTodo.isCompleted;
+        this.setState({ todos: this.state.todos });
+    }
+
     render() {
         return (
             <div>
                 <h1>React todo list</h1>
-                <CreateTodo createTask={this.createTask.bind(this)}/>
+                <CreateTodo createTask={this.createTask.bind(this) }/>
                 <TodosList
-                    todos={this.state.todos}/>
+                    todos={this.state.todos}
+                    toggleTask={this.toggleTask.bind(this) }/>
             </div>
         );
     }
