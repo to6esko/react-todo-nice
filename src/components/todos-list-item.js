@@ -33,11 +33,13 @@ export default class TodosListItem extends React.Component {
                     <form onSubmit={this.onSaveClick.bind(this) }>
                         <input type="text" defaultValue={task} ref="editInput"/>
                     </form>    
-                    </td>
-            )
+                </td>
+            );
         }
         return (
-            <td style={taskStyle} onClick={this.props.toggleTask.bind(this,task)}>{task}</td>
+            <td style={taskStyle} onClick={this.props.toggleTask.bind(this,task)}>
+               {task}
+            </td>
         );
 }
     renderActionSection() {
@@ -51,7 +53,7 @@ export default class TodosListItem extends React.Component {
         }
         return (
             <td>
-                <button onClick={this.onEditClick.bind(this) }>Edit</button>
+                <button onClick={this.onEditClick.bind(this)}>Edit</button>
                 <button onClick={this.props.deleteTask.bind(this,this.props.task)}>Delete</button>
             </td>
         );

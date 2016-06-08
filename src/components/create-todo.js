@@ -12,14 +12,15 @@ export default class CreateTodo extends React.Component {
         const createInput = this.refs.createInput;
         const task = createInput.value;
         const validateInput = this.validateInput(task);
-        
+
         if (validateInput) {
             this.setState({ error: validateInput });
-        }
+            return;
+        } 
+            this.setState({ error: null });
+            this.props.createTask(task);
+            this.refs.createInput.value = "";
         
-        this.setState({ error: null });
-        this.props.createTask(task);
-        this.refs.createInput.value = "";
     }
 
     validateInput(task) {
@@ -34,12 +35,14 @@ export default class CreateTodo extends React.Component {
 
 
     renderError() {
-        if (!this.state.error) { return null };
+        if (!this.state.error) {
+            return null;
+        };
         return <div style={{ color: 'red' }}>{this.state.error}</div>
 }    
     render() {
         return (
-            <form onSubmit={this.handleCreate.bind(this)}>
+            <form onSubmit={this.handleCreate.bind(this) }>
                 <input type="text" ref="createInput"placeholder="What do I need to do?"/>
                 <button>Create</button>
                 {this.renderError()}
