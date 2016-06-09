@@ -6,7 +6,7 @@ export default class CreateTodo extends React.Component {
         super(props);
         this.state = { error: null };
     }
-    
+
     handleCreate(e) {
         e.preventDefault();
         const createInput = this.refs.createInput;
@@ -16,37 +16,41 @@ export default class CreateTodo extends React.Component {
         if (validateInput) {
             this.setState({ error: validateInput });
             return;
-        } 
-            this.setState({ error: null });
-            this.props.createTask(task);
-            this.refs.createInput.value = "";
-        
+        }
+
+        this.setState({ error: null });
+        this.props.createTask(task);
+        this.refs.createInput.value = "";
+
     }
 
     validateInput(task) {
         if (!task) {
             return "Pleace enter a task.";
-        } else if (_.find(this.props.todos, todo => todo.task === task)) {
-            return "Task already exists.";
-        } else { 
-            return null;
         }
+        
+        if (_.find(this.props.todos, todo => todo.task === task)) {
+            return "Task already exists.";
+        }
+            
+        return null;
     }
 
 
     renderError() {
         if (!this.state.error) {
             return null;
-        };
+        }
+
         return <div style={{ color: 'red' }}>{this.state.error}</div>
-}    
+    }
     render() {
         return (
             <form onSubmit={this.handleCreate.bind(this) }>
                 <input type="text" ref="createInput"placeholder="What do I need to do?"/>
                 <button>Create</button>
-                {this.renderError()}
-                </form>
+                {this.renderError() }
+            </form>
         );
     }
 }
