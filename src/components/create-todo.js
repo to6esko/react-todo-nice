@@ -27,19 +27,19 @@ export default class CreateTodo extends React.Component {
     }
 
 
-    renderCreate(e) {
-        e.preventDefault();
+    renderCreate(event) {
+        event.preventDefault();
         const createInput = this.refs.createInput;
-        const task = createInput.value;
+        const value = createInput.value;
 
-        const validateInput = this.validateInput(task);
+        const validateInput = this.validateInput(value);
         if (validateInput) {
             this.setState({ error: validateInput });
             return;
         }
 
         this.setState({ error: null });
-        this.props.createTask(task);
+        this.props.createTask(value);
         this.refs.createInput.value = "";
     }
 
